@@ -11,15 +11,27 @@ class ViewController: UIViewController {
     
     let shape = CAShapeLayer()
     
+    private let label: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = "Activity Hours"
+        label.font = .systemFont(ofSize: 36, weight: .light)
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        label.sizeToFit()
+        view.addSubview(label)
+        label.center = view.center
         
         let circlePath = UIBezierPath(arcCenter: view.center, radius: 150, startAngle: -(Double.pi/2), endAngle: (Double.pi) * 2, clockwise: true)
+    
         
         shape.path = circlePath.cgPath
         shape.lineWidth = 15
-        shape.strokeColor = UIColor.blue.cgColor
+        shape.strokeColor = UIColor.gray.cgColor
         shape.fillColor = UIColor.clear.cgColor
         shape.strokeEnd = 0
         view.layer.addSublayer(shape)
