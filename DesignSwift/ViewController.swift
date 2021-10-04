@@ -11,20 +11,20 @@ class ViewController: UIViewController {
     
     let shape = CAShapeLayer()
     
-    private let label: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.text = "GOOD MORNING"
-        label.font = .systemFont(ofSize: 36, weight: .light)
-        return label
+    private let text: UILabel = {
+        let text = UILabel()
+        text.text = "GOOD MORNING"
+        text.font = .systemFont(ofSize: 30, weight: .light)
+        text.textAlignment = .center
+        return text
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        label.sizeToFit()
-        view.addSubview(label)
-        label.center = view.center
+        text.sizeToFit()
+        view.addSubview(text)
+        text.center = view.center
         
         shape.path = UIBezierPath(arcCenter: CGPoint(x: view.frame.size.width/2, y: view.frame.size.height/2),
                                 radius: 150,
@@ -43,9 +43,9 @@ class ViewController: UIViewController {
                                             height: 50))
         
         view.addSubview(button)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         button.setTitle("Click to See The Sun", for: .normal)
         button.backgroundColor = .systemOrange
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
     }
     
