@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     private let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = "Activity Hours"
+        label.text = "GOOD MORNING"
         label.font = .systemFont(ofSize: 36, weight: .light)
         return label
     }()
@@ -26,32 +26,36 @@ class ViewController: UIViewController {
         view.addSubview(label)
         label.center = view.center
         
-        let circlePath = UIBezierPath(arcCenter: view.center, radius: 150, startAngle: -(Double.pi/2), endAngle: (Double.pi) * 2, clockwise: true)
-    
+        shape.path = UIBezierPath(arcCenter: CGPoint(x: view.frame.size.width/2, y: view.frame.size.height/2),
+                                radius: 150,
+                                startAngle: CGFloat(110.0),
+                                endAngle: CGFloat(0.0),
+                                clockwise: true).cgPath
         
-        shape.path = circlePath.cgPath
         shape.lineWidth = 15
-        shape.strokeColor = UIColor.gray.cgColor
+        shape.strokeColor = UIColor.yellow.cgColor
         shape.fillColor = UIColor.clear.cgColor
         shape.strokeEnd = 0
         view.layer.addSublayer(shape)
         
-        let button = UIButton(frame: CGRect(x: 20, y: view.frame.size.width-250, width: view.frame.size.width-40, height: 50))
+        let button = UIButton(frame: CGRect(x: 20, y: view.frame.size.width+60,
+                                            width: view.frame.size.width-40,
+                                            height: 50))
         
         view.addSubview(button)
-        button.setTitle("Animate", for: .normal)
-        button.backgroundColor = .systemGreen
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        button.setTitle("Click to See The Sun", for: .normal)
+        button.backgroundColor = .systemOrange
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
     }
     
-    @objc func didTapButton() {
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.toValue = 1
-        animation.duration = 3
-        animation.isRemovedOnCompletion = false
-        animation.fillMode = .forwards
-        shape.add(animation, forKey: "animation")
+    @objc func buttonAction() {
+        let action = CABasicAnimation(keyPath: "strokeEnd")
+        action.isRemovedOnCompletion = false
+        action.fillMode = .forwards
+        action.toValue = 1
+        action.duration = 2
+        shape.add(action, forKey: "action")
     }
   
 }
